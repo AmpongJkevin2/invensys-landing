@@ -64,7 +64,7 @@ window.addEventListener('scroll', () => {
 /* ══ 3. TYPING HERO ══════════════════════════════════════════ */
 (function initTyping() {
   const el     = document.getElementById('typed');
-  const words  = ['Management System', 'Dashboard', 'Built in Python', 'for UCC CPE'];
+  const words  = ['Management System', 'for UCC Engineering', 'Built in Python', 'Offline & Fast'];
   let wi = 0, ci = 0, deleting = false;
 
   function tick() {
