@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InvenSy — UCC Inventory Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ░░ BACKGROUND ░░ -->
+  <div class="bg-grid"></div>
+  <div class="bg-radial"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ░░ NAVBAR ░░ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <img src="ucc_logo.png" alt="UCC Logo" class="nav-logo" />
+        <span class="nav-title">Inven<span class="accent">Sy</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+      <div class="nav-badge">CPE Exhibition 2026</div>
+    </div>
+  </nav>
+
+  <!-- ░░ HERO ░░ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-tag reveal-up" data-delay="0">
+        <span class="tag-dot"></span> UCC · College of Engineering · CPE Dept.
+      </div>
+      <h1 class="hero-title reveal-up" data-delay="100">
+        Smart Inventory<br />
+        <span class="gradient-text typing-text" id="typed"></span>
+      </h1>
+      <p class="hero-sub reveal-up" data-delay="200">
+        A Python-powered desktop inventory management system with real-time SQLite storage,
+        multi-format export, role-based access, and a futuristic dashboard — built for
+        real-world engineering workflows.
+      </p>
+      <div class="hero-btns reveal-up" data-delay="300">
+        <a href="#demo" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          See Demo
+        </a>
+        <a href="#features" class="btn btn-outline">
+          Explore Features
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats reveal-up" data-delay="400">
+        <div class="stat">
+          <span class="stat-num counter" data-target="3">0</span>
+          <span class="stat-label">Export Formats</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num counter" data-target="100">0</span><span class="stat-pct">%</span>
+          <span class="stat-label">Python Native</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num counter" data-target="0">0</span>
+          <span class="stat-label">External DB Cost</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal-right" data-delay="200">
+      <div class="dashboard-mockup">
+        <div class="mock-titlebar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <span class="mock-title">InvenSy — Dashboard</span>
+        </div>
+        <div class="mock-body">
+          <div class="mock-sidebar">
+            <div class="mock-nav-item active">📊 Dashboard</div>
+            <div class="mock-nav-item">📋 View Data</div>
+            <div class="mock-nav-item">📥 Import</div>
+            <div class="mock-nav-item">➕ Add Record</div>
+            <div class="mock-nav-item">📤 Export</div>
+            <div class="mock-nav-item">⚙️ Settings</div>
+          </div>
+          <div class="mock-main">
+            <div class="mock-header-row">
+              <span class="mock-heading">Inventory Dashboard</span>
+              <span class="mock-badge">Live</span>
+            </div>
+            <div class="mock-charts-row">
+              <div class="mock-chart-box">
+                <div class="mock-chart-label">Status Distribution</div>
+                <div class="mock-donut">
+                  <svg viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#003322" stroke-width="12"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#00ffaa" stroke-width="12"
+                      stroke-dasharray="75 113" stroke-dashoffset="25" class="donut-seg seg1"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#00cc88" stroke-width="12"
+                      stroke-dasharray="38 150" stroke-dashoffset="-48" class="donut-seg seg2"/>
+                    <circle cx="40" cy="40" r="30" fill="none" stroke="#ffaa00" stroke-width="12"
+                      stroke-dasharray="25 163" stroke-dashoffset="-86" class="donut-seg seg3"/>
+                  </svg>
+                  <div class="donut-center">188<br/><small>total</small></div>
+                </div>
+                <div class="mock-legend">
+                  <span><i style="background:#00ffaa"></i>Active</span>
+                  <span><i style="background:#00cc88"></i>In-use</span>
+                  <span><i style="background:#ffaa00"></i>Pending</span>
+                </div>
+              </div>
+              <div class="mock-chart-box">
+                <div class="mock-chart-label">Records per Table</div>
+                <div class="mock-bar-chart">
+                  <div class="bar-row"><span>Lab A</span><div class="bar-track"><div class="bar-fill" style="--w:80%"></div></div></div>
+                  <div class="bar-row"><span>Lab B</span><div class="bar-track"><div class="bar-fill" style="--w:55%"></div></div></div>
+                  <div class="bar-row"><span>Office</span><div class="bar-track"><div class="bar-fill" style="--w:35%"></div></div></div>
+                  <div class="bar-row"><span>Stores</span><div class="bar-track"><div class="bar-fill" style="--w:62%"></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="mock-table-preview">
+              <div class="mock-table-row header-row">
+                <span>Item Name</span><span>Status</span><span>Qty</span>
+              </div>
+              <div class="mock-table-row">
+                <span>Arduino Uno R3</span><span class="status-active">Active</span><span>12</span>
+              </div>
+              <div class="mock-table-row">
+                <span>Oscilloscope</span><span class="status-active">Active</span><span>3</span>
+              </div>
+              <div class="mock-table-row">
+                <span>Soldering Iron</span><span class="status-pending">Pending</span><span>8</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-glow-ring"></div>
+    </div>
+  </section>
+
+  <!-- ░░ MARQUEE STRIP ░░ -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Python</span><span class="sep">◆</span>
+      <span>SQLite</span><span class="sep">◆</span>
+      <span>Tkinter GUI</span><span class="sep">◆</span>
+      <span>Excel Export</span><span class="sep">◆</span>
+      <span>CSV Export</span><span class="sep">◆</span>
+      <span>JSON Export</span><span class="sep">◆</span>
+      <span>Role-Based Access</span><span class="sep">◆</span>
+      <span>Batch Update</span><span class="sep">◆</span>
+      <span>Real-time Charts</span><span class="sep">◆</span>
+      <span>History Logs</span><span class="sep">◆</span>
+      <span>Recovery Manager</span><span class="sep">◆</span>
+      <!-- duplicate for seamless loop -->
+      <span>Python</span><span class="sep">◆</span>
+      <span>SQLite</span><span class="sep">◆</span>
+      <span>Tkinter GUI</span><span class="sep">◆</span>
+      <span>Excel Export</span><span class="sep">◆</span>
+      <span>CSV Export</span><span class="sep">◆</span>
+      <span>JSON Export</span><span class="sep">◆</span>
+      <span>Role-Based Access</span><span class="sep">◆</span>
+      <span>Batch Update</span><span class="sep">◆</span>
+      <span>Real-time Charts</span><span class="sep">◆</span>
+      <span>History Logs</span><span class="sep">◆</span>
+      <span>Recovery Manager</span><span class="sep">◆</span>
+    </div>
+  </div>
+
+  <!-- ░░ FEATURES ░░ -->
+  <section class="section features-section" id="features">
+    <div class="section-inner">
+      <div class="section-label reveal-up">What It Does</div>
+      <h2 class="section-title reveal-up" data-delay="100">
+        Built for Real-World<br /><span class="gradient-text">Engineering Workflows</span>
+      </h2>
+      <p class="section-sub reveal-up" data-delay="200">
+        Every feature was designed to handle actual inventory management challenges in academic and engineering environments.
+      </p>
+
+      <div class="features-grid">
+
+        <div class="feature-card reveal-scale" data-delay="0">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/></svg>
+          </div>
+          <h3>SQLite Database</h3>
+          <p>Zero-config, file-based database. All inventory data is stored locally — no server needed. Supports multiple tables for different departments or lab rooms.</p>
+          <div class="feature-tag">Built-in · Offline-first</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="100">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3>Dashboard & Charts</h3>
+          <p>Visualize inventory health at a glance. Interactive pie and bar charts show status distribution and record counts across all your tables in real time.</p>
+          <div class="feature-tag">Chart.js · Real-time</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="200">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3>Multi-Format Export</h3>
+          <p>Export your entire inventory in three formats — Excel (.xlsx), CSV, and JSON — for reporting, backups, or integration with other tools.</p>
+          <div class="feature-tag">Excel · CSV · JSON</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="300">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Role-Based Access</h3>
+          <p>Granular permission system with admin and user roles. Control who can view, add, edit, delete, import, or export — per user, per action.</p>
+          <div class="feature-tag">Admin · User · Permissions</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="400">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          </div>
+          <h3>Batch Update</h3>
+          <p>Update multiple records simultaneously. Apply status changes or field edits across an entire table selection without touching each entry individually.</p>
+          <div class="feature-tag">Bulk Edit · Time-saving</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="500">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+          </div>
+          <h3>Recovery Manager</h3>
+          <p>Accidentally deleted something? The built-in recovery system keeps a history of changes and allows data to be restored without manual backups.</p>
+          <div class="feature-tag">Undo · History · Safe</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="600">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Smart Search</h3>
+          <p>Instant keyword search across all columns. Filter by any field — item name, status, quantity, or custom attributes — with live results as you type.</p>
+          <div class="feature-tag">Live Filter · All Columns</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="700">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <h3>Excel Import</h3>
+          <p>Seed your system by uploading an existing Excel spreadsheet. InvenSy converts it to a database table automatically — no manual entry required.</p>
+          <div class="feature-tag">XLSX Upload · Auto-convert</div>
+        </div>
+
+        <div class="feature-card reveal-scale" data-delay="800">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Audit History</h3>
+          <p>Every create, edit, and delete action is timestamped and logged. Full traceability for accountability — know exactly what changed and when.</p>
+          <div class="feature-tag">Logged · Timestamped</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ HOW IT WORKS ░░ -->
+  <section class="section how-section" id="how-it-works">
+    <div class="section-inner">
+      <div class="section-label reveal-up">The Flow</div>
+      <h2 class="section-title reveal-up" data-delay="100">
+        How <span class="gradient-text">InvenSy</span> Works
+      </h2>
+      <p class="section-sub reveal-up" data-delay="200">
+        From raw data to actionable insights in four simple steps.
+      </p>
+
+      <div class="steps-container">
+        <div class="steps-line"></div>
+
+        <div class="step reveal-left" data-delay="0">
+          <div class="step-number">01</div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3>Import or Add Data</h3>
+            <p>Upload an Excel file or manually add records through the built-in form. InvenSy converts your spreadsheet into a structured SQLite database automatically.</p>
+            <div class="step-code">
+              <span class="code-comment"># Auto-convert Excel → SQLite</span>
+              <span>df = pd.read_excel(<span class="code-str">"inventory.xlsx"</span>)</span>
+              <span>df.to_sql(table, conn)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reveal-right" data-delay="100">
+          <div class="step-number">02</div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3>Search, Filter & Manage</h3>
+            <p>Use the powerful search bar to find any item instantly. Edit individual records or run a batch update across hundreds of entries in one go.</p>
+            <div class="step-code">
+              <span class="code-comment"># Smart search query</span>
+              <span>SELECT * FROM items</span>
+              <span>WHERE name LIKE <span class="code-str">"%arduino%"</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reveal-left" data-delay="200">
+          <div class="step-number">03</div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3>Visualize on Dashboard</h3>
+            <p>The dashboard auto-generates charts from your live data — status distributions, record counts, and field breakdowns — all updated in real time.</p>
+            <div class="step-code">
+              <span class="code-comment"># Live chart data injection</span>
+              <span>stats = db.get_status_counts()</span>
+              <span>render(<span class="code-str">"dashboard"</span>, stats=stats)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step reveal-right" data-delay="300">
+          <div class="step-number">04</div>
+          <div class="step-card">
+            <div class="step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3>Export & Report</h3>
+            <p>Generate reports in Excel, CSV, or JSON with a single click. Share inventory snapshots with faculty, administration, or for archiving purposes.</p>
+            <div class="step-code">
+              <span class="code-comment"># One-click export</span>
+              <span>df.to_excel(<span class="code-str">"report.xlsx"</span>)</span>
+              <span>df.to_csv(<span class="code-str">"backup.csv"</span>)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ DEMO / SCREENSHOTS ░░ -->
+  <section class="section demo-section" id="demo">
+    <div class="section-inner">
+      <div class="section-label reveal-up">Live Preview</div>
+      <h2 class="section-title reveal-up" data-delay="100">
+        See It In <span class="gradient-text">Action</span>
+      </h2>
+      <p class="section-sub reveal-up" data-delay="200">
+        Explore the core screens of InvenSy — each designed for speed, clarity, and ease of use.
+      </p>
+
+      <div class="demo-tabs reveal-up" data-delay="300">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="data">Data Table</button>
+        <button class="tab-btn" data-tab="export">Export</button>
+        <button class="tab-btn" data-tab="users">User Mgmt</button>
+      </div>
+
+      <div class="demo-window reveal-up" data-delay="400">
+        <div class="demo-titlebar">
+          <div class="titlebar-dots">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          </div>
+          <span class="titlebar-label" id="demo-label">InvenSy · Dashboard</span>
+          <div class="titlebar-right">
+            <span class="status-live"><span class="live-dot"></span>Running</span>
+          </div>
+        </div>
+        <div class="demo-screen" id="demo-screen">
+
+          <!-- DASHBOARD TAB -->
+          <div class="demo-tab-content active" id="tab-dashboard">
+            <div class="demo-sidebar">
+              <div class="demo-brand">
+                <div class="demo-logo-ring"></div>
+                <span>InvenSy</span>
+              </div>
+              <div class="demo-nav">
+                <div class="demo-nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</div>
+                <div class="demo-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg> View Data</div>
+                <div class="demo-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Import</div>
+                <div class="demo-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg> Add Record</div>
+                <div class="demo-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg> Export</div>
+              </div>
+              <div class="demo-user-chip">
+                <div class="user-avatar">A</div>
+                <div>
+                  <div class="user-name">Admin</div>
+                  <div class="user-role">Super Admin</div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-content">
+              <div class="demo-topbar">
+                <h3 class="demo-page-title">Inventory Dashboard</h3>
+                <div class="demo-actions">
+                  <span class="demo-time" id="demo-clock"></span>
+                </div>
+              </div>
+              <div class="demo-stats-row">
+                <div class="demo-stat-card">
+                  <div class="dsc-label">Total Items</div>
+                  <div class="dsc-val">188</div>
+                  <div class="dsc-trend up">↑ 12% this week</div>
+                </div>
+                <div class="demo-stat-card">
+                  <div class="dsc-label">Active</div>
+                  <div class="dsc-val" style="color:#00ffaa">142</div>
+                  <div class="dsc-trend up">↑ 75.5%</div>
+                </div>
+                <div class="demo-stat-card">
+                  <div class="dsc-label">Pending</div>
+                  <div class="dsc-val" style="color:#ffaa00">28</div>
+                  <div class="dsc-trend down">↓ needs action</div>
+                </div>
+                <div class="demo-stat-card">
+                  <div class="dsc-label">Tables</div>
+                  <div class="dsc-val">4</div>
+                  <div class="dsc-trend up">Across labs</div>
+                </div>
+              </div>
+              <div class="demo-charts">
+                <div class="demo-chart-card">
+                  <div class="demo-chart-title">Status Distribution</div>
+                  <canvas id="demoDonut" width="200" height="200"></canvas>
+                </div>
+                <div class="demo-chart-card wide">
+                  <div class="demo-chart-title">Records per Table</div>
+                  <canvas id="demoBar" width="300" height="180"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATA TABLE TAB -->
+          <div class="demo-tab-content" id="tab-data">
+            <div class="demo-content full">
+              <div class="demo-topbar">
+                <h3 class="demo-page-title">View Data · Lab_A</h3>
+                <div class="demo-actions">
+                  <div class="demo-search-box">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Search records…
+                  </div>
+                </div>
+              </div>
+              <div class="demo-table-wrap">
+                <table class="demo-table">
+                  <thead>
+                    <tr><th>#</th><th>Item Name</th><th>Category</th><th>Qty</th><th>Status</th><th>Last Updated</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="tr-anim" style="--d:0ms"><td>001</td><td>Arduino Uno R3</td><td>Microcontroller</td><td>12</td><td><span class="s-badge active">Active</span></td><td>Oct 08, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:60ms"><td>002</td><td>Oscilloscope 50MHz</td><td>Test Equipment</td><td>3</td><td><span class="s-badge active">Active</span></td><td>Oct 07, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:120ms"><td>003</td><td>Soldering Iron</td><td>Tools</td><td>8</td><td><span class="s-badge pending">Pending</span></td><td>Oct 06, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:180ms"><td>004</td><td>Raspberry Pi 4B</td><td>SBC</td><td>5</td><td><span class="s-badge active">Active</span></td><td>Oct 05, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:240ms"><td>005</td><td>Multimeter</td><td>Test Equipment</td><td>7</td><td><span class="s-badge inuse">In-Use</span></td><td>Oct 04, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:300ms"><td>006</td><td>Breadboard (full)</td><td>Prototyping</td><td>20</td><td><span class="s-badge active">Active</span></td><td>Oct 03, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                    <tr class="tr-anim" style="--d:360ms"><td>007</td><td>ESP32 DevKit</td><td>Microcontroller</td><td>9</td><td><span class="s-badge active">Active</span></td><td>Oct 02, 2026</td><td><span class="act-btn edit">Edit</span><span class="act-btn del">Del</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="demo-pagination">
+                <span>Showing 1–7 of 72 records</span>
+                <div class="page-btns">
+                  <button class="page-btn active">1</button>
+                  <button class="page-btn">2</button>
+                  <button class="page-btn">3</button>
+                  <button class="page-btn">→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXPORT TAB -->
+          <div class="demo-tab-content" id="tab-export">
+            <div class="demo-content full">
+              <div class="demo-topbar">
+                <h3 class="demo-page-title">Export Data</h3>
+              </div>
+              <div class="export-grid">
+                <div class="export-card">
+                  <div class="export-icon" style="color:#00cc44">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  </div>
+                  <div class="export-format">Excel (.xlsx)</div>
+                  <div class="export-desc">Full spreadsheet with all columns, formatting, and multiple sheets per table.</div>
+                  <div class="export-btn-demo">⬇ Export All to Excel</div>
+                </div>
+                <div class="export-card">
+                  <div class="export-icon" style="color:#00aaff">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <div class="export-format">CSV</div>
+                  <div class="export-desc">Universal comma-separated format compatible with any spreadsheet application.</div>
+                  <div class="export-btn-demo">⬇ Export as CSV</div>
+                </div>
+                <div class="export-card">
+                  <div class="export-icon" style="color:#ffaa00">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  </div>
+                  <div class="export-format">JSON</div>
+                  <div class="export-desc">Machine-readable JSON output for API integration or data migration purposes.</div>
+                  <div class="export-btn-demo">⬇ Export as JSON</div>
+                </div>
+              </div>
+              <div class="export-preview">
+                <div class="exp-preview-label">Preview · JSON output</div>
+                <pre class="exp-code">{
+  "table": "Lab_A",
+  "exported_at": "2026-10-08T14:32:00",
+  "records": [
+    {
+      "id": 1,
+      "name": "Arduino Uno R3",
+      "category": "Microcontroller",
+      "quantity": 12,
+      "status": "Active"
+    },
+    ...
+  ]
+}</pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- USERS TAB -->
+          <div class="demo-tab-content" id="tab-users">
+            <div class="demo-content full">
+              <div class="demo-topbar">
+                <h3 class="demo-page-title">Manage Users</h3>
+                <div class="demo-actions">
+                  <div class="add-user-btn">+ Add User</div>
+                </div>
+              </div>
+              <div class="users-grid">
+                <div class="user-card uc-anim" style="--d:0ms">
+                  <div class="uc-avatar adm">K</div>
+                  <div class="uc-info">
+                    <div class="uc-name">Kevin A.</div>
+                    <div class="uc-role admin-role">Super Admin</div>
+                  </div>
+                  <div class="uc-perms">
+                    <span class="perm on">View</span><span class="perm on">Add</span><span class="perm on">Edit</span><span class="perm on">Delete</span><span class="perm on">Export</span>
+                  </div>
+                </div>
+                <div class="user-card uc-anim" style="--d:80ms">
+                  <div class="uc-avatar">B</div>
+                  <div class="uc-info">
+                    <div class="uc-name">Bron</div>
+                    <div class="uc-role">Staff</div>
+                  </div>
+                  <div class="uc-perms">
+                    <span class="perm on">View</span><span class="perm on">Add</span><span class="perm on">Edit</span><span class="perm off">Delete</span><span class="perm off">Export</span>
+                  </div>
+                </div>
+                <div class="user-card uc-anim" style="--d:160ms">
+                  <div class="uc-avatar">C</div>
+                  <div class="uc-info">
+                    <div class="uc-name">Acebedo</div>
+                    <div class="uc-role">Viewer</div>
+                  </div>
+                  <div class="uc-perms">
+                    <span class="perm on">View</span><span class="perm off">Add</span><span class="perm off">Edit</span><span class="perm off">Delete</span><span class="perm off">Export</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /demo-screen -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ TECH STACK ░░ -->
+  <section class="section tech-section" id="tech">
+    <div class="section-inner">
+      <div class="section-label reveal-up">Under the Hood</div>
+      <h2 class="section-title reveal-up" data-delay="100">
+        The <span class="gradient-text">Tech Stack</span>
+      </h2>
+      <div class="tech-grid">
+        <div class="tech-pill reveal-scale" data-delay="0">
+          <div class="tech-icon python">Py</div>
+          <div>
+            <div class="tech-name">Python 3.x</div>
+            <div class="tech-desc">Core language</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="80">
+          <div class="tech-icon sqlite">DB</div>
+          <div>
+            <div class="tech-name">SQLite</div>
+            <div class="tech-desc">Storage engine</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="160">
+          <div class="tech-icon flask">FL</div>
+          <div>
+            <div class="tech-name">Flask</div>
+            <div class="tech-desc">Web server layer</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="240">
+          <div class="tech-icon tkinter">TK</div>
+          <div>
+            <div class="tech-name">Tkinter</div>
+            <div class="tech-desc">Desktop GUI</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="320">
+          <div class="tech-icon pandas">PD</div>
+          <div>
+            <div class="tech-name">pandas</div>
+            <div class="tech-desc">Data processing</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="400">
+          <div class="tech-icon openpyxl">XL</div>
+          <div>
+            <div class="tech-name">openpyxl</div>
+            <div class="tech-desc">Excel I/O</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="480">
+          <div class="tech-icon chartjs">CH</div>
+          <div>
+            <div class="tech-name">Chart.js</div>
+            <div class="tech-desc">Data visualization</div>
+          </div>
+        </div>
+        <div class="tech-pill reveal-scale" data-delay="560">
+          <div class="tech-icon bs">BS</div>
+          <div>
+            <div class="tech-name">Bootstrap 5</div>
+            <div class="tech-desc">UI framework</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ TEAM ░░ -->
+  <section class="section team-section" id="team">
+    <div class="section-inner">
+      <div class="section-label reveal-up">The Builders</div>
+      <h2 class="section-title reveal-up" data-delay="100">
+        Meet the <span class="gradient-text">Team</span>
+      </h2>
+      <p class="section-sub reveal-up" data-delay="200">
+        CPE students from the University of Caloocan City, College of Engineering.
+      </p>
+      <div class="team-grid">
+        <div class="team-card reveal-scale" data-delay="0">
+          <div class="team-avatar">K</div>
+          <div class="team-name">Kevin Ampong</div>
+          <div class="team-role">Lead Developer · Backend & Architecture</div>
+          <div class="team-tags">
+            <span>Python</span><span>SQLite</span><span>DevOps</span>
+          </div>
+        </div>
+        <div class="team-card reveal-scale" data-delay="100">
+          <div class="team-avatar">A</div>
+          <div class="team-name">Acebedo</div>
+          <div class="team-role">Frontend Developer · UI/UX</div>
+          <div class="team-tags">
+            <span>HTML/CSS</span><span>Bootstrap</span><span>Design</span>
+          </div>
+        </div>
+        <div class="team-card reveal-scale" data-delay="200">
+          <div class="team-avatar">B</div>
+          <div class="team-name">Bron</div>
+          <div class="team-role">Developer · Data & Testing</div>
+          <div class="team-tags">
+            <span>pandas</span><span>QA</span><span>Excel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="ucc_logo.png" alt="UCC Logo" class="footer-logo" />
+        <div>
+          <div class="footer-title">InvenSy</div>
+          <div class="footer-sub">University of Caloocan City · CPE Department</div>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>Built for the CPE Exhibition 2026 · College of Engineering</p>
+        <p>Python · SQLite · Flask · Tkinter</p>
+      </div>
+      <div class="footer-badge">
+        <div class="fb-inner">
+          <span class="fb-dot"></span> Desktop App · No download link available at kiosk
+        </div>
+      </div>
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-copy">© 2026 InvenSy Team · University of Caloocan City · All rights reserved</div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
