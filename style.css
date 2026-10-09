@@ -27,7 +27,6 @@ body{
   background:var(--bg);
   color:#fff;
   overflow-x:hidden;
-  cursor:none; /* custom cursor */
 }
 
 /* ── CUSTOM CURSOR ── */
@@ -37,6 +36,7 @@ body{
   background:radial-gradient(circle,rgba(0,255,170,.07) 0%,transparent 70%);
   transform:translate(-50%,-50%);
   transition:transform .05s linear;
+  display:none; /* Wait for JS to show it */
 }
 
 /* ── SCROLLBAR ── */
@@ -96,7 +96,7 @@ body{
 .nav-links a{
   color:rgba(255,255,255,.5);text-decoration:none;
   font-size:.88rem;font-weight:500;letter-spacing:.3px;
-  transition:color .2s;cursor:none;
+  transition:color .2s;
 }
 .nav-links a:hover{color:var(--g);}
 .nav-pill{
@@ -157,7 +157,7 @@ body{
   color:var(--bg);font-weight:700;font-size:.95rem;
   padding:.85rem 1.9rem;border-radius:10px;text-decoration:none;
   box-shadow:0 4px 28px rgba(0,255,170,.3);
-  transition:all .25s;cursor:none;
+  transition:all .25s;
 }
 .cta-primary:hover{transform:translateY(-4px);box-shadow:0 10px 40px rgba(0,255,170,.45);}
 .cta-ghost{
@@ -165,7 +165,7 @@ body{
   color:var(--g);font-weight:600;font-size:.95rem;
   text-decoration:none;padding:.85rem 1.4rem;
   border:1.5px solid var(--bord);border-radius:10px;
-  transition:all .25s;cursor:none;
+  transition:all .25s;
 }
 .cta-ghost:hover{background:rgba(0,255,170,.07);border-color:var(--g);}
 
@@ -283,7 +283,7 @@ body{
 .stab{
   background:rgba(0,255,170,.06);border:1px solid var(--bord);
   color:rgba(255,255,255,.5);padding:.5rem 1.2rem;border-radius:8px;
-  font-size:.85rem;font-weight:500;cursor:none;transition:all .22s;
+  font-size:.85rem;font-weight:500;cursor:pointer;transition:all .22s;
   font-family:var(--font);
 }
 .stab:hover,.stab.active{background:rgba(0,255,170,.14);border-color:var(--g);color:var(--g);}
@@ -343,7 +343,7 @@ body{
   background:linear-gradient(135deg,var(--g),var(--g2));
   border:none;border-radius:40px;color:#041f1f;
   font-size:1rem;font-weight:800;letter-spacing:2px;
-  text-transform:uppercase;cursor:none;
+  text-transform:uppercase;cursor:pointer;
   box-shadow:0 5px 24px rgba(0,255,170,.4);
   transition:all .25s;font-family:var(--font);
 }
@@ -378,7 +378,7 @@ body{
 .rc-sb-link{
   display:block;padding:.45rem 1rem;font-size:.75rem;
   color:rgba(255,255,255,.4);text-decoration:none;
-  border-left:2px solid transparent;transition:.2s;cursor:none;
+  border-left:2px solid transparent;transition:.2s;cursor:pointer;
 }
 .rc-sb-link.active{color:var(--g);background:rgba(0,255,170,.07);border-color:var(--g);}
 .rc-sb-link:hover{color:var(--g);padding-left:1.3rem;}
@@ -402,7 +402,7 @@ body{
 .rc-data-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem .5rem;border-bottom:1px solid rgba(0,255,170,.07);}
 .rc-data-title{font-size:.9rem;font-weight:700;color:#fff;}
 .rc-data-btns{display:flex;gap:.4rem;}
-.rc-btn-sm{font-size:.68rem;padding:.28rem .7rem;border-radius:5px;cursor:none;border:1px solid;}
+.rc-btn-sm{font-size:.68rem;padding:.28rem .7rem;border-radius:5px;cursor:pointer;border:1px solid;}
 .rc-btn-sm.add{background:rgba(0,255,136,.15);color:#00ff88;border-color:rgba(0,255,136,.25);}
 .rc-btn-sm.info{background:rgba(0,170,255,.12);color:#00aaff;border-color:rgba(0,170,255,.25);}
 .rc-search-row{display:flex;gap:.5rem;padding:.6rem 1.2rem;align-items:center;}
@@ -688,5 +688,7 @@ body{
   .rc-cards{flex-direction:column;}
 }
 
-/* cursor none on interactive on mobile */
-@media(hover:none){body{cursor:auto;}#cursorGlow{display:none;}.cta-primary,.cta-ghost,.stab,.rc-sb-link,.rc-btn,.app-btn,.nav-links a{cursor:pointer;}}
+/* cursor pointer overrides */
+.app-btn{cursor:pointer;}
+.tbadge,.tb-edit,.tb-del{cursor:pointer;}
+.pg{cursor:pointer;}
